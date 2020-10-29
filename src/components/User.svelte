@@ -13,6 +13,8 @@ export let loading = true;
 
 export const update = _.debounce(_update, 20);
 
+const PER_PAGE = 24;
+
 let data;
 let error;
 let notGrantedFull;
@@ -22,7 +24,7 @@ let filterText;
 $: granted =  data && data.filter(champion => champion.chestGranted);
 $: {
     notGrantedFull = data && data.filter(champion => !champion.chestGranted);
-    notGranted = data && data.filter(champion => !champion.chestGranted).slice(0, 24)
+    notGranted = data && data.filter(champion => !champion.chestGranted).slice(0, PER_PAGE)
 };
 
 async function _update(username, region) {
@@ -88,10 +90,10 @@ onMount(() => update(username, region));
                 {:else}
                     <h3>Nothing here :(</h3>
                 {/if}
-                {#if notGranted.length < notGrantedFull.length}
+                {#if notGranted.length < notGrantedFull.length && notGranted.length > PER_PAGE}
                     <button
                         class="btn btn-block btn-outline-light my-3"
-                        on:click={ () => notGranted = notGrantedFull.slice(0, notGranted.length + 24) }>
+                        on:click={ () => notGranted = notGrantedFull.slice(0, notGranted.length + PER_PAGE) }>
                         Load more
                     </button>
                 {/if}
