@@ -1,0 +1,21 @@
+h3 {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.form-control {
+    background: $dark;
+    color: $light;
+    border-color: $light;
+}
+
+.form-control:focus {
+    background: darken($dark, 10);
+    color: $light;
+    border-color: $light;
+}
