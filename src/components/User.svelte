@@ -6,6 +6,7 @@ import _ from 'lodash';
 
 import regions from '../constants/regions.js';
 import '../scss/user.scss';
+import ChampionList from './ChampionList.svelte';
 
 export let username;
 export let region;
@@ -13,18 +14,15 @@ export let loading = true;
 
 export const update = _.debounce(_update, 20);
 
-const PER_PAGE = 24;
-
 let data;
 let error;
-let notGrantedFull;
+let granted;
 let notGranted;
 
 let filterText;
-$: granted =  data && data.filter(champion => champion.chestGranted);
 $: {
-    notGrantedFull = data && data.filter(champion => !champion.chestGranted);
-    notGranted = data && data.filter(champion => !champion.chestGranted).slice(0, PER_PAGE)
+    granted =  data && data.filter(champion => champion.chestGranted);
+    notGranted = data && data.filter(champion => !champion.chestGranted);
 };
 
 async function _update(username, region) {
@@ -47,6 +45,7 @@ async function _update(username, region) {
 }
 
 function filter() {
+
     if (filterText) {
         granted = data.filter(champion => {
             const champName = champion.name.toLowerCase();
@@ -78,40 +77,11 @@ onMount(() => update(username, region));
         <div class="row">
             <div class="col-md-7">
                 <h2>To earn:</h2>
-                {#if notGranted.length}
-                    <div class="row">
-                    {#each notGranted as champion}
-                        <div class="col-3 col-md-4 col-lg-3 my-1 text-center">
-                            <img src={ champion.image } alt={ champion.name }>
-                            <div>{ champion.name }</div>
-                        </div>
-                    {/each}
-                    </div>
-                {:else}
-                    <h3>Nothing here :(</h3>
-                {/if}
-                {#if notGranted.length < notGrantedFull.length && notGranted.length > PER_PAGE}
-                    <button
-                        class="btn btn-block btn-outline-light my-3"
-                        on:click={ () => notGranted = notGrantedFull.slice(0, notGranted.length + PER_PAGE) }>
-                        Load more
-                    </button>
-                {/if}
+                <ChampionList list={ notGranted } perPage={ 24 } />
             </div>
             <div class="col-md-5">
                 <h2>Earned:</h2>
-                {#if granted.length}
-                    <div class="row">
-                    {#each granted as champion}
-                        <div class="col-3 col-md-4 col-lg-2 my-1 text-center">
-                            <img src={ champion.image } alt={ champion.name }>
-                            <div class="small">{ champion.name }</div>
-                        </div>
-                    {/each}
-                    </div>
-                {:else}
-                    <h3>Nothing here :(</h3>
-                {/if}
+                <ChampionList list={ granted } size="sm" />
             </div>
         </div>
     {:else}
