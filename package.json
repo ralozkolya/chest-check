@@ -1,6 +1,12 @@
 {
-  "name": "svelte-app",
-  "version": "1.0.0",
+  "name": "chest-check",
+  "version": "0.1.0",
+  "description": "A tool to check what champions have been granted a chest during given season",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ralozkolya/chest-check.git"
+  },
+  "license": "ISC",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
