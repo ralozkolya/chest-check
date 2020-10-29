@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
     res.send(mapped);
 
   } catch (e) {
-    res.status(e.response.status || 500).send(e);
+    res.status(e.response && e.response.status || 500).send(e);
   }
 
 };
