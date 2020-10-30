@@ -28,6 +28,7 @@ module.exports = async (req, res) => {
       const full = champMap[champ.championId];
 
       return {
+        id: champ.championId,
         points: champ.championPoints,
         name: full.name,
         level: champ.championLevel,

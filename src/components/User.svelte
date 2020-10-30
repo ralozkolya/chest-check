@@ -5,8 +5,8 @@ import { onMount } from 'svelte';
 import _ from 'lodash';
 
 import regions from '../../data/regions.json';
-import '../scss/user.scss';
 import ChampionList from './ChampionList.svelte';
+import Dropdown from './Dropdown.svelte';
 
 export let username;
 export let region;
@@ -14,15 +14,19 @@ export let loading = true;
 
 export const update = _.debounce(_update, 20);
 
+const FORGOTTEN_KEY = 'forgotten';
+
 let data;
 let error;
 let granted;
 let notGranted;
+let forgotten;
+let forgottenIds = localStorage.getItem(FORGOTTEN_KEY)?.split(',').map(id => parseInt(id));
 
-let filterText;
 $: {
-    granted =  data && data.filter(champion => champion.chestGranted);
-    notGranted = data && data.filter(champion => !champion.chestGranted);
+    granted =  data?.filter(champion => champion.chestGranted);
+    notGranted = data?.filter(champion => !champion.chestGranted && !forgottenIds.includes(champion.id));
+    forgotten = data?.filter(champion => forgottenIds.includes(champion.id));
 };
 
 async function _update(username, region) {
@@ -44,23 +48,30 @@ async function _update(username, region) {
     loading = false;
 }
 
-function filter() {
+function filter({ target: { value } }) {
 
-    if (filterText) {
-        granted = data.filter(champion => {
-            const champName = champion.name.toLowerCase();
-            const inputName = filterText.toLowerCase();
-            return champion.chestGranted && champName.includes(inputName);
+    if (value) {
+
+        const inputName = value.toLowerCase();
+
+        granted = [];
+        notGranted = [];
+
+        data.forEach(champion => {
+            if (champion.name.toLowerCase().includes(inputName)) {
+                champion.chestGranted ? granted.push(champion) : notGranted.push(champion);
+            }
         });
 
-        notGranted = data.filter(champion => {
-            const champName = champion.name.toLowerCase();
-            const inputName = filterText.toLowerCase();
-            return !champion.chestGranted && champName.includes(inputName);
-        });
     } else {
         data = data;
     }
+}
+
+function forget(id) {
+    forgottenIds.includes(id) ? forgottenIds.splice(forgottenIds.indexOf(id), 1) : forgottenIds.push(id);
+    localStorage.setItem(FORGOTTEN_KEY, forgottenIds.filter(i => i));
+    data = data;
 }
 
 onMount(() => update(username, region));
@@ -71,17 +82,21 @@ onMount(() => update(username, region));
     {#if granted}
         <div class="row my-5">
             <div class="col-md-4 offset-md-8">
-                <input class="form-control" type="text" placeholder="Filter" bind:value={ filterText } on:input={ filter }>
+                <input class="form-control" type="text" placeholder="Filter" on:input={ filter }>
             </div>
         </div>
         <div class="row">
             <div class="col-md-7">
                 <h2>To earn:</h2>
-                <ChampionList list={ notGranted } perPage={ 24 } />
+                <ChampionList list={ notGranted } perPage={ 24 } on:forget={ e => forget(e.detail) } />
             </div>
             <div class="col-md-5">
                 <h2>Earned:</h2>
-                <ChampionList list={ granted } size="sm" />
+                <ChampionList list={ granted } size="sm" showForget={ false } />
+                {#if forgotten.length}
+                    <h2 class="mt-3">Forgotten (RIP):</h2>
+                    <ChampionList list={ forgotten } size="sm"  on:forget={ e => forget(e.detail) } />
+                {/if}
             </div>
         </div>
     {:else}

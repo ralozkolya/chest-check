@@ -17,12 +17,12 @@ function handleUpdate(d) {
 </script>
 
 <Router>
-  <div class="container">
+  <div class="container d-flex flex-column min-vh-100">
     <header class="my-5">
       <h1><Link to="/">Chest check</Link></h1>
     </header>
 
-    <main>
+    <main class="flex-grow-1">
       <SearchForm { loading } on:update={ handleUpdate } />
       <Route path=":region/:username" let:params>
         <User bind:this={ user } bind:loading={ loading } { ...params } />
@@ -31,6 +31,10 @@ function handleUpdate(d) {
         <h3>Enter summoner name to check granted chests</h3>
       </Route>
     </main>
+
+    <footer class="my-3 text-center text-muted">
+      <a href="https://github.com/ralozkolya/chest-check" target="_blank">Source</a>
+    </footer>
 
   </div>
 
