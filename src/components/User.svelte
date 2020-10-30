@@ -7,6 +7,7 @@ import _ from 'lodash';
 import regions from '../../data/regions.json';
 import ChampionList from './ChampionList.svelte';
 import Dropdown from './Dropdown.svelte';
+import { splitData, updateForgotten } from '../utils/filter';
 
 export let username;
 export let region;
@@ -21,14 +22,9 @@ let error;
 let granted;
 let notGranted;
 let forgotten;
-let forgottenIds = localStorage.getItem(FORGOTTEN_KEY);
-forgottenIds = forgottenIds ? forgottenIds.split(',').map(id => parseInt(id)) : [];
+let name;
 
-$: {
-    granted =  data && data.filter(champion => champion.chestGranted);
-    notGranted = data && data.filter(champion => !champion.chestGranted && !forgottenIds.includes(champion.id));
-    forgotten = data && data.filter(champion => forgottenIds.includes(champion.id));
-};
+$: filter(data);
 
 async function _update(username, region) {
     try {
@@ -49,30 +45,13 @@ async function _update(username, region) {
     loading = false;
 }
 
-function filter({ target: { value } }) {
-
-    if (value) {
-
-        const inputName = value.toLowerCase();
-
-        granted = [];
-        notGranted = [];
-
-        data.forEach(champion => {
-            if (champion.name.toLowerCase().includes(inputName)) {
-                champion.chestGranted ? granted.push(champion) : notGranted.push(champion);
-            }
-        });
-
-    } else {
-        data = data;
-    }
+function filter() {
+    ({ granted, notGranted, forgotten } = splitData(data, name));
 }
 
 function forget(id) {
-    forgottenIds.includes(id) ? forgottenIds.splice(forgottenIds.indexOf(id), 1) : forgottenIds.push(id);
-    localStorage.setItem(FORGOTTEN_KEY, forgottenIds.filter(i => i));
-    data = data;
+    updateForgotten(id);
+    filter();
 }
 
 onMount(() => update(username, region));
@@ -80,10 +59,10 @@ onMount(() => update(username, region));
 </script>
 
 <div>
-    {#if granted}
+    {#if !loading}
         <div class="row my-5">
             <div class="col-md-4 offset-md-8">
-                <input class="form-control" type="text" placeholder="Filter" on:input={ filter }>
+                <input class="form-control" type="text" placeholder="Filter" bind:value={ name } on:input={ filter }>
             </div>
         </div>
         <div class="row">
