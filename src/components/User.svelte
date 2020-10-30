@@ -21,12 +21,13 @@ let error;
 let granted;
 let notGranted;
 let forgotten;
-let forgottenIds = localStorage.getItem(FORGOTTEN_KEY)?.split(',').map(id => parseInt(id));
+let forgottenIds = localStorage.getItem(FORGOTTEN_KEY);
+forgottenIds = forgottenIds ? forgottenIds.split(',').map(id => parseInt(id)) : [];
 
 $: {
-    granted =  data?.filter(champion => champion.chestGranted);
-    notGranted = data?.filter(champion => !champion.chestGranted && !forgottenIds.includes(champion.id));
-    forgotten = data?.filter(champion => forgottenIds.includes(champion.id));
+    granted =  data && data.filter(champion => champion.chestGranted);
+    notGranted = data && data.filter(champion => !champion.chestGranted && !forgottenIds.includes(champion.id));
+    forgotten = data && data.filter(champion => forgottenIds.includes(champion.id));
 };
 
 async function _update(username, region) {
