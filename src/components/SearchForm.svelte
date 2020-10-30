@@ -14,12 +14,21 @@ const USERNAME_KEY = 'username';
 
 const regionKeys = Object.keys(regions);
 
-let region = localStorage.getItem(REGION_KEY) || regionKeys[0];
-let username = localStorage.getItem(USERNAME_KEY) || '';
+const path = location.pathname.split('/').slice(1);
+let region;
+let username;
+
+if (2 === path.length && regionKeys.includes(path[0])) {
+    [ region, username ] = path;
+} else {
+    region = localStorage.getItem(REGION_KEY) || regionKeys[0];
+    username = localStorage.getItem(USERNAME_KEY) || '';
+}
 
 const dispatch = createEventDispatcher();
 
 function onSubmit() {
+
     localStorage.setItem(REGION_KEY, region);
     localStorage.setItem(USERNAME_KEY, username);
     navigate(`/${region}/${username}`);
