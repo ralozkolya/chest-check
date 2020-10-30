@@ -1,6 +1,6 @@
 const axios = require('axios');
 const assert = require('assert');
-const regions = require('../src/constants/regions.js');
+const regions = require('../data/regions.json');
 const champMap = require('./map.json');
 
 module.exports = async (req, res) => {

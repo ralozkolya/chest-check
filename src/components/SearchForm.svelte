@@ -3,7 +3,7 @@
 import { createEventDispatcher } from 'svelte';
 import dropdown from 'bootstrap/js/dist/dropdown';
 import { navigate } from 'svelte-routing';
-import regions from '../constants/regions.js';
+import regions from '../../data/regions.json';
 import '../scss/search-form.scss';
 import Dropdown from './Dropdown.svelte';
 

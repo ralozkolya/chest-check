@@ -4,7 +4,7 @@ import axios from 'axios';
 import { onMount } from 'svelte';
 import _ from 'lodash';
 
-import regions from '../constants/regions.js';
+import regions from '../../data/regions.json';
 import '../scss/user.scss';
 import ChampionList from './ChampionList.svelte';
 
