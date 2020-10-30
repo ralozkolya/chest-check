@@ -11,7 +11,7 @@ let loading;
 
 function handleUpdate(d) {
   const { username, region } = d.detail;
-  setTimeout(() => user.update(username, region), 0);
+  user && user.update(username, region);
 }
 
 </script>

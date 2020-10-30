@@ -1,21 +1,22 @@
 <script>
 
-import axios from 'axios';
-import { onMount } from 'svelte';
 import _ from 'lodash';
+import { onMount } from 'svelte';
 
 import regions from '../../data/regions.json';
 import ChampionList from './ChampionList.svelte';
 import Dropdown from './Dropdown.svelte';
 import { splitData, updateForgotten } from '../utils/filter';
+import search from '../utils/api';
 
 export let username;
 export let region;
 export let loading = true;
 
-export const update = _.debounce(_update, 20);
-
-const FORGOTTEN_KEY = 'forgotten';
+export function update() {
+    loading = true;
+    retrieve();
+}
 
 let data;
 let error;
@@ -26,24 +27,16 @@ let name;
 
 $: filter(data);
 
-async function _update(username, region) {
+const retrieve = _.debounce(async () => {
+    loading = true;
     try {
-        loading = true;
         data = error = null;
-        const response = await axios.get('/api/search', {
-            params: { username, region: regions[region] }
-        });
-        data = response.data;
+        data = await search(username, regions[region]);
     } catch (e) {
-        if (e.response && 404 === e.response.status) {
-            error = 'Summoner was not found';
-        } else {
-            error = 'Unexpected error occured';
-        }
+        error = e.message;
     }
-
     loading = false;
-}
+}, 10);
 
 function filter() {
     ({ granted, notGranted, forgotten } = splitData(data, name));
@@ -54,7 +47,7 @@ function forget(id) {
     filter();
 }
 
-onMount(() => update(username, region));
+onMount(update);
 
 </script>
 
