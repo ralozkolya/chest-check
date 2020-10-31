@@ -66,14 +66,14 @@ onMount(update);
         </div>
         <div class="row">
             <div class="col-md-7">
-                <h2>To earn:</h2>
+                <h2>To earn ({ notGranted.length }):</h2>
                 <ChampionList list={ notGranted } perPage={ 24 } on:forget={ e => forget(e.detail) } />
             </div>
             <div class="col-md-5">
-                <h2>Earned:</h2>
-                <ChampionList list={ granted } size="sm" showForget={ false } />
+                <h2>Earned ({ granted.length }):</h2>
+                <ChampionList list={ granted } size="sm" on:forget={ e => forget(e.detail) } />
                 {#if forgotten.length}
-                    <h2 class="mt-3">Forgotten (RIP):</h2>
+                    <h2 class="mt-3">Forgotten (RIP) ({ forgotten.length }):</h2>
                     <ChampionList list={ forgotten } size="sm"  on:forget={ e => forget(e.detail) } />
                 {/if}
             </div>
