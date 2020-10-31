@@ -55,7 +55,13 @@ onMount(update);
     {#if !loading}
         <div class="row my-5">
             <div class="col-md-4 offset-md-8">
-                <input class="form-control" type="text" placeholder="Filter" bind:value={ name } on:input={ filter }>
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Filter"
+                    bind:value={ name }
+                    on:input={ filter }
+                    aria-label="Filter">
             </div>
         </div>
         <div class="row">

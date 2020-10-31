@@ -40,7 +40,13 @@ function onSubmit() {
 <form on:submit|preventDefault={onSubmit}>
     <div class="form-group">
         <div class="input-group">
-            <input type="text" class="form-control form-control-lg" bind:value={username} placeholder="Summoner name" required>
+            <input
+                type="text"
+                class="form-control form-control-lg"
+                bind:value={ username }
+                placeholder="Summoner name"
+                aria-label="Summoner name"
+                required>
             <div class="input-group-append">
                 <Dropdown keys={ regionKeys } bind:value={ region } />
             </div>
