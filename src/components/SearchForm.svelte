@@ -51,7 +51,7 @@ function onSubmit() {
                 <Dropdown keys={ regionKeys } bind:value={ region } />
             </div>
             <div class="input-group-append">
-                <button class="btn btn-outline-light" disabled={ loading }>
+                <button class="btn btn-outline-light wide" disabled={ loading }>
                     { loading ? 'Loading...' : 'Search' }
                 </button>
             </div>

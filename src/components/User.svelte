@@ -25,7 +25,7 @@ let notGranted;
 let forgotten;
 let name;
 
-$: filter(data);
+$: filter(data, name);
 
 const retrieve = _.debounce(async () => {
     loading = true;
@@ -38,13 +38,13 @@ const retrieve = _.debounce(async () => {
     loading = false;
 }, 10);
 
-function filter() {
+function filter(data, name) {
     ({ granted, notGranted, forgotten } = splitData(data, name));
 }
 
 function forget(id) {
     updateForgotten(id);
-    filter();
+    filter(data, name);
 }
 
 onMount(update);
@@ -55,13 +55,22 @@ onMount(update);
     {#if !loading}
         <div class="row my-5">
             <div class="col-md-4 offset-md-8">
-                <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Filter"
-                    bind:value={ name }
-                    on:input={ filter }
-                    aria-label="Filter">
+                <div class="input-group">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Filter"
+                        bind:value={ name }
+                        on:input={ filter }
+                        aria-label="Filter">
+                    <div class="input-group-append">
+                        <button
+                            class="btn btn-outline-light"
+                            on:click={ () => name = '' }>
+                            &times;
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">

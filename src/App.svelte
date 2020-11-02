@@ -33,7 +33,7 @@ function handleUpdate(d) {
     </main>
 
     <footer class="my-3 text-center">
-      <a rel="noreferrer" href="https://github.com/ralozkolya/chest-check" target="_blank">Source</a>
+      <a class="mr-3" rel="noreferrer" href="https://github.com/ralozkolya/chest-check" target="_blank">Source</a>
     </footer>
 
   </div>

@@ -7,11 +7,6 @@
     opacity: .1;
     transform: translateY(-150%);
     transition: transform .5s, opacity .5s;
-
-    > .btn {
-        min-width: 2rem;
-        font-weight: bold;
-    }
 }
 
 div:hover > .close {
