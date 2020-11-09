@@ -16,7 +16,7 @@ export function splitData(data, name) {
         data = data.filter(champ => champ.name.toLowerCase().includes(name));
     }
 
-    data && data.forEach(champ => {
+    Array.isArray(data) && data.forEach(champ => {
         if (forgottenIds.includes(champ.id)) {
             response.forgotten.push(champ);
         } else if (champ.chestGranted) {

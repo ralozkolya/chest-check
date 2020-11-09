@@ -1,7 +1,8 @@
 const axios = require('axios');
 const assert = require('assert');
+const fs = require('fs');
 const regions = require('../data/regions.json');
-const champMap = require('../data/map.json');
+const update = require('../api-utils/update');
 
 module.exports = async (req, res) => {
   
@@ -14,6 +15,9 @@ module.exports = async (req, res) => {
     return res.status(422).send(e.message);
   }
 
+  await update();
+  const champMap = require('../data/championsFull.json');
+
   const { username, region } = req.query;
   const url = `https://${region}.api.riotgames.com`;
 
@@ -25,7 +29,7 @@ module.exports = async (req, res) => {
 
     const mapped = mastery.data.map(champ => {
 
-      const full = champMap[champ.championId];
+      const full = champMap.data[champMap.keys[champ.championId]];
 
       return {
         id: champ.championId,

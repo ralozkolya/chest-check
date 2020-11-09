@@ -52,7 +52,7 @@ onMount(update);
 </script>
 
 <div>
-    {#if !loading}
+    {#if !loading && !error}
         <div class="row my-5">
             <div class="col-md-4 offset-md-8">
                 <div class="input-group">

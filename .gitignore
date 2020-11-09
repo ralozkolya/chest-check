@@ -5,3 +5,5 @@ public/bundle.*
 .env.build
 
 .vercel
+data/version
+data/championsFull.json
