@@ -1,6 +1,7 @@
 <script>
 
 import Champion from './Champion.svelte';
+import TumbleWeedContainer from './TumbleWeedContainer.svelte';
 import '../scss/champion-list.scss';
 
 export let perPage = null;
@@ -21,7 +22,8 @@ $: sliced = perPage ? list.slice(0, perPage) : list;
     {/each}
     </div>
 {:else}
-    <h3>Nothing here :(</h3>
+    <h3 class="darken">Nothing here :(</h3>
+    <TumbleWeedContainer />
 {/if}
 {#if sliced.length < list.length && list.length > perPage}
     <button

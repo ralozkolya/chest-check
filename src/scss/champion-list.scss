@@ -8,3 +8,7 @@ img {
     font-size: .7rem;
     word-wrap: break-word;
 }
+
+.darken {
+    color: darken($light, 30);
+}
