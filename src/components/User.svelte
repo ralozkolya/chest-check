@@ -59,7 +59,6 @@
             class="form-control"
             placeholder="Filter"
             bind:value={name}
-            on:input={filter}
             aria-label="Filter" />
           <div class="input-group-append">
             <button class="btn btn-outline-light" on:click={() => (name = '')}>
