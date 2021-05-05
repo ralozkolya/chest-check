@@ -5,6 +5,7 @@ import json from '@rollup/plugin-json';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import scss from 'rollup-plugin-scss';
+import sass from 'sass';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -20,11 +21,6 @@ export default {
     svelte({
       // enable run-time checks when not in production
       dev: !production,
-      // we'll extract any component CSS out into
-      // a separate file — better for performance
-      css: css => {
-        css.write('bundle.css');
-      }
     }),
 
     // If you have external dependencies installed from
@@ -42,7 +38,7 @@ export default {
     // If we're building for production (npm run build
     // instead of npm run dev), minify
     production && terser(),
-    scss(),
+    scss({ output: true, sass }),
     json()
   ],
   watch: {
