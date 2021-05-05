@@ -1,5 +1,5 @@
 <script>
-  import dropdown from "bootstrap/js/dist/dropdown";
+  import "bootstrap/js/dist/dropdown";
 
   export let keys;
   export let value;
