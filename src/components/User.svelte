@@ -17,7 +17,7 @@
     retrieve();
   }
 
-  let data;
+  let data = [];
   let error;
   let granted;
   let notGranted;
@@ -29,7 +29,8 @@
   const retrieve = _.debounce(async () => {
     loading = true;
     try {
-      data = error = null;
+      data = [];
+      error = null;
       data = await search(username, regions[region]);
     } catch (e) {
       error = e.message;
@@ -50,24 +51,24 @@
 </script>
 
 <div>
-  {#if !loading && !error}
-    <div class="row my-5">
-      <div class="col-md-4 offset-md-8">
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Filter"
-            bind:value={name}
-            aria-label="Filter" />
-          <div class="input-group-append">
-            <button class="btn btn-outline-light" on:click={() => (name = '')}>
-              &times;
-            </button>
-          </div>
+  <div class="row my-5">
+    <div class="col-md-4 offset-md-8">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Filter"
+          bind:value={name}
+          aria-label="Filter" />
+        <div class="input-group-append">
+          <button class="btn btn-outline-light" on:click={() => (name = '')}>
+            &times;
+          </button>
         </div>
       </div>
     </div>
+  </div>
+  {#if !loading && !error}
     <div class="row">
       <div class="col-md-7">
         <h2>To earn ({notGranted.length}):</h2>
