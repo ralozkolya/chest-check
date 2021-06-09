@@ -1,7 +1,7 @@
 const axios = require('axios');
 const assert = require('assert');
-const fs = require('fs');
 const regions = require('../data/regions.json');
+// https://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/championFull.json
 const champMap = require('../data/championsFull.json');
 
 module.exports = async (req, res) => {
@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
         name: full.name,
         level: champ.championLevel,
         chestGranted: champ.chestGranted,
-        image: `https://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${full.image.full}`
+        image: `https://ddragon.leagueoflegends.com/cdn/${champMap.version}/img/champion/${full.image.full}`
       };
     });
 
