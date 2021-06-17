@@ -4,7 +4,6 @@
 
   import regions from "../../data/regions.json";
   import ChampionList from "./ChampionList.svelte";
-  import Dropdown from "./Dropdown.svelte";
   import { splitData, updateForgotten } from "../utils/filter";
   import search from "../utils/api";
 

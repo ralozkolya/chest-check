@@ -1,6 +1,7 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
   import { navigate } from "svelte-routing";
+  import { globalHistory } from "svelte-routing/src/history";
   import regions from "../../data/regions.json";
   import "../scss/search-form.scss";
   import Dropdown from "./Dropdown.svelte";
@@ -31,6 +32,15 @@
     navigate(`/${region}/${username}`);
     dispatch("update", { username, region });
   }
+
+  let refresh = location.pathname.length > 1;
+
+  onMount(() => {
+    globalHistory.listen(() => {
+      refresh = location.pathname.length > 1;
+    });
+  });
+
 </script>
 
 <form on:submit|preventDefault={onSubmit}>
@@ -48,7 +58,7 @@
       </div>
       <div class="input-group-append">
         <button class="btn btn-outline-light wide" disabled={loading}>
-          {loading ? 'Loading...' : 'Search'}
+          { loading ? 'Loading...' : refresh ? 'Refresh' : 'Search' }
         </button>
       </div>
     </div>
