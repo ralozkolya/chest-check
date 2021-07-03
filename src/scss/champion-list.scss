@@ -24,6 +24,10 @@ img {
     transition: transform .5s, opacity .5s;
 }
 
+.name {
+    padding: 10px;
+}
+
 div:hover > .close {
     transform: translateY(10%);
     opacity: .8;
