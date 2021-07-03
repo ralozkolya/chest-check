@@ -26,6 +26,10 @@ img {
 
 .name {
     padding: 10px 0;
+
+    &.small {
+        padding: 5px 0;
+    }
 }
 
 div:hover > .close {
