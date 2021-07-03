@@ -32,8 +32,11 @@
         </div>
         <img class="w-100" src={champion.image} alt={champion.name} />
         <div class="name" class:small={'lg' !== size}>
-          <a href={`https://u.gg/lol/champions/${champion.name.toLowerCase()}/build`}>
-            {champion.name}
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href={`https://u.gg/lol/champions/${champion.name.toLowerCase()}/build`}>
+            {champion.name} 🡕
           </a>
         </div>
       </div>
