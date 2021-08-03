@@ -1,7 +1,10 @@
 const axios = require('axios');
 const assert = require('assert');
 const regions = require('../data/regions.json');
-// https://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/championFull.json
+// To retrieve the versions list, check
+// https://ddragon.leagueoflegends.com/api/versions.json
+// Champion list
+// https://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/championFull.json
 const champMap = require('../data/championsFull.json');
 
 module.exports = async (req, res) => {
