@@ -1,13 +1,13 @@
-const axios = require('axios');
-const assert = require('assert');
-const regions = require('../data/regions.json');
+import axios from 'axios';
+import assert from 'assert';
+import regions from '../data/regions.json';
 // To retrieve the versions list, check
 // https://ddragon.leagueoflegends.com/api/versions.json
 // Champion list
 // https://ddragon.leagueoflegends.com/cdn/11.15.1/data/en_US/championFull.json
-const champMap = require('../data/championsFull.json');
+import champMap from '../data/championsFull.json';
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   
   const { RIOT_KEY } = process.env;
   const params = { headers: { 'X-Riot-Token': RIOT_KEY } };
