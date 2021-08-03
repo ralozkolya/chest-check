@@ -1,10 +1,10 @@
-@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
 
 .search-input {
     flex-grow: 4 !important;
 }
 
-@media (min-width: map-get($grid-breakpoints,md)) {
+@include media-breakpoint-up(md) {
 
     .search-input {
         flex-grow: 8 !important;
