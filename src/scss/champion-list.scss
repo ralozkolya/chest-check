@@ -1,7 +1,17 @@
 @import "bootstrap/scss/variables";
 
-img {
-    max-width: 100%;
+.img-container {
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    background: darken($dark, 3);
+
+    > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
 }
 
 .small {

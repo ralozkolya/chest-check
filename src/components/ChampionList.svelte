@@ -30,7 +30,9 @@
             &times;
           </button>
         </div>
-        <img class="w-100" src={champion.image} alt={champion.name} />
+        <div class="img-container">
+          <img class="w-100" src={champion.image} alt={champion.name} />
+        </div>
         <div class="name" class:small={'lg' !== size}>
           <a
             rel="noreferrer"
