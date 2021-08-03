@@ -53,14 +53,10 @@
         placeholder="Summoner name"
         aria-label="Summoner name"
         required />
-      <div class="input-group-append">
-        <Dropdown keys={regionKeys} bind:value={region} />
-      </div>
-      <div class="input-group-append">
-        <button class="btn btn-outline-light wide" disabled={loading}>
-          { loading ? 'Loading...' : refresh ? 'Refresh' : 'Search' }
-        </button>
-      </div>
+      <Dropdown keys={regionKeys} bind:value={region} />
+      <button class="btn btn-outline-light wide" disabled={loading}>
+        { loading ? 'Loading...' : refresh ? 'Refresh' : 'Search' }
+      </button>
     </div>
   </div>
 </form>

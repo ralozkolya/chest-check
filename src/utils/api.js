@@ -1,16 +1,19 @@
-import axios from 'axios';
-
 export default async function search(username, region) {
     try {
-        const response = await axios.get('/api/search', {
-            params: { username, region }
-        });
-        return response.data;
-    } catch (e) {
-        if (e.response && 404 === e.response.status) {
-            throw Error('Summoner was not found');
-        } else {
-            throw Error('Unexpected error occured');
+
+        const url = `/api/search?${new URLSearchParams({ username, region })}`;
+        const response = await fetch(url);
+
+        if (response.ok) {
+            return response.json();
         }
+
+        throw Error('Summoner was not found');
+
+    } catch (e) {
+        const message = e.message === 'Summoner was not found'
+            ? e.message
+            : 'Unexpected error occured';
+        throw Error(message);
     }
 }

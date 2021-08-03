@@ -20,7 +20,7 @@
     {#each sliced as champion (champion.id)}
       <div
         animate:flip={{ duration: 200 }}
-        class="col-3 col-md-4 my-1 text-center overflow-hidden"
+        class="champion col-3 col-md-4 my-1 text-center overflow-hidden"
         class:col-lg-2={'lg' !== size}
         class:col-lg-3={'lg' === size}>
         <div class="close">
@@ -49,9 +49,11 @@
   <TumbleWeedContainer />
 {/if}
 {#if sliced.length < list.length && list.length > perPage}
-  <button
-    class="btn btn-block btn-outline-light my-3"
-    on:click={() => (sliced = list.slice(0, sliced.length + perPage))}>
-    Load more
-  </button>
+  <div class="d-grid">
+    <button
+      class="btn btn-outline-light my-3"
+      on:click={() => (sliced = list.slice(0, sliced.length + perPage))}>
+      Load more
+    </button>
+  </div>
 {/if}

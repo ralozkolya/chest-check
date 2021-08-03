@@ -1,5 +1,7 @@
 <script>
-  import "bootstrap/js/dist/dropdown";
+  import 'bootstrap/js/dist/dropdown';
+
+  window.process = { env: {} };
 
   export let keys;
   export let value;
@@ -8,7 +10,7 @@
 <button
   class="btn btn-outline-light dropdown-toggle"
   type="button"
-  data-toggle="dropdown"
+  data-bs-toggle="dropdown"
   aria-haspopup="true"
   aria-expanded="false">
   {value}

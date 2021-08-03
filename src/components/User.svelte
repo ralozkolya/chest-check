@@ -70,20 +70,20 @@
   {#if !loading && !error}
     <div class="row">
       <div class="col-md-7">
-        <h2>To earn ({notGranted.length}):</h2>
+        <h4>To earn ({notGranted.length}):</h4>
         <ChampionList
           list={notGranted}
           perPage={24}
           on:forget={e => forget(e.detail)} />
       </div>
       <div class="col-md-5">
-        <h2>Earned ({granted.length}):</h2>
+        <h4>Earned ({granted.length}):</h4>
         <ChampionList
           list={granted}
           size="sm"
           on:forget={e => forget(e.detail)} />
         {#if forgotten.length}
-          <h2 class="mt-3">Forgotten (RIP) ({forgotten.length}):</h2>
+          <h4 class="mt-3">Forgotten (RIP) ({forgotten.length}):</h4>
           <ChampionList
             list={forgotten}
             size="sm"
@@ -96,7 +96,7 @@
   {:else}
     <div class="d-flex justify-content-center align-items-center align mt-5 darken">
       <div class="spinner-border text-center" role="status"></div>
-      <h3 class="ml-3">Loading...</h3>
+      <h3 class="ms-3">Loading...</h3>
     </div>
   {/if}
 </div>

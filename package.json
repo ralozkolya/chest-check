@@ -13,19 +13,18 @@
     "npm-run-all": "^4.1.5",
     "rollup": "^2.34.2",
     "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-scss": "^3.0.0",
     "rollup-plugin-svelte": "^6.1.1",
     "rollup-plugin-terser": "^6.1.0",
     "sass": "^1.37.2",
     "svelte": "^3.31.0"
   },
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
     "@rollup/plugin-json": "^4.1.0",
     "axios": "^0.21.0",
-    "bootstrap": "^4.5.3",
-    "jquery": "^3.5.1",
+    "bootstrap": "^5.0.2",
     "lodash": "^4.17.20",
-    "popper.js": "^1.16.1",
-    "rollup-plugin-scss": "^2.6.1",
     "sirv-cli": "^1.0.10",
     "svelte-routing": "^1.4.2"
   },
