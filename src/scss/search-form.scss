@@ -1,7 +1,17 @@
-@media (min-width: 768px) {
+@import 'bootstrap/scss/variables';
+
+.search-input {
+    flex-grow: 4 !important;
+}
+
+@media (min-width: map-get($grid-breakpoints,md)) {
+
+    .search-input {
+        flex-grow: 8 !important;
+    }
 
     .wide, .dropdown-toggle {
-        min-width: 100px;
+        flex-basis: 150px;
     }
 
 }

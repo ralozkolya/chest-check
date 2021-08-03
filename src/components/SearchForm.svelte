@@ -48,7 +48,7 @@
     <div class="input-group">
       <input
         type="text"
-        class="form-control form-control-lg"
+        class="form-control form-control-lg search-input"
         bind:value={username}
         placeholder="Summoner name"
         aria-label="Summoner name"
