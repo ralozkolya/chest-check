@@ -1,5 +1,5 @@
 <script>
-  import _ from "lodash";
+  import debounce from "lodash/debounce";
   import { onMount } from "svelte";
 
   import regions from "../../data/regions.json";
@@ -25,7 +25,7 @@
 
   $: filter(data, name);
 
-  const retrieve = _.debounce(async () => {
+  const retrieve = debounce(async () => {
     loading = true;
     try {
       data = [];
