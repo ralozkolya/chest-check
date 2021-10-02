@@ -1,6 +1,4 @@
-<svg class="tumbleweed" version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="864px" height="864px" viewBox="0 0 864 864" enable-background="new 0 0 864 864" xml:space="preserve">
+<svg class="tumbleweed" viewBox="0 0 864 864">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M135.708,444.458c8.388-35.936,12.715-73.495,26.265-107.365
       c14.631-36.572,14.588-70.059-0.094-105.141c-22.187,24.956-18.151,64.412-42.341,88.701c-2.36-0.824-4.722-1.647-7.084-2.47
       c1.561-9.194,1.935-18.797,4.936-27.493c5.481-15.877,12.944-31.063,18.617-46.884c1.479-4.12,0.055-9.697-1.186-14.294

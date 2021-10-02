@@ -1,7 +1,17 @@
-@media (min-width: 768px) {
+@import 'bootstrap/scss/mixins';
+
+.search-input {
+    flex-grow: 4 !important;
+}
+
+@include media-breakpoint-up(md) {
+
+    .search-input {
+        flex-grow: 8 !important;
+    }
 
     .wide, .dropdown-toggle {
-        min-width: 100px;
+        flex-basis: 150px;
     }
 
 }
