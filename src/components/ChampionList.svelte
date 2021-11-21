@@ -10,6 +10,10 @@
 
   const dispatch = createEventDispatcher();
 
+  const transform = name => {
+    return name.replace(/\W/g, '').toLowerCase();
+  };
+
   let sliced;
 
   $: sliced = perPage ? list.slice(0, perPage) : list;
@@ -37,7 +41,7 @@
           <a
             rel="noreferrer"
             target="_blank"
-            href={`https://u.gg/lol/champions/${champion.name.toLowerCase()}/build`}>
+            href={`https://u.gg/lol/champions/${transform(champion.name)}/build`}>
             {champion.name} 🡕
           </a>
         </div>
