@@ -1,50 +1,29 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import Champion from "./Champion.svelte";
   import { flip } from "svelte/animate";
   import TumbleWeedContainer from "./TumbleWeedContainer.svelte";
-  import "../scss/champion-list.scss";
+
+  import '../scss/champion-list.scss';
 
   export let perPage = null;
   export let list = [];
   export let size = "lg";
-
-  const dispatch = createEventDispatcher();
-
-  const transform = name => {
-    return name.replace(/\W/g, '').toLowerCase();
-  };
-
+  
+  const elementId = `id-${crypto.randomUUID()}`;
   let sliced;
 
   $: sliced = perPage ? list.slice(0, perPage) : list;
 </script>
 
 {#if sliced.length}
-  <div class="row">
+  <div class="row position-relative" id={ elementId }>
     {#each sliced as champion (champion.id)}
       <div
         animate:flip={{ duration: 200 }}
-        class="champion col-3 col-md-4 my-1 text-center overflow-hidden"
+        class="col-3 col-md-4 my-2 overflow-hidden"
         class:col-lg-2={'lg' !== size}
         class:col-lg-3={'lg' === size}>
-        <div class="close">
-          <button
-            class="btn btn-sm btn-danger"
-            on:click={() => dispatch('forget', champion.id)}>
-            &times;
-          </button>
-        </div>
-        <div class="img-container">
-          <img class="w-100" src={champion.image} alt={champion.name} />
-        </div>
-        <div class="name" class:small={'lg' !== size}>
-          <a
-            rel="noreferrer"
-            target="_blank"
-            href={`https://u.gg/lol/champions/${transform(champion.name)}/build`}>
-            {champion.name} 🡕
-          </a>
-        </div>
+        <Champion on:forget {champion} parent={ `#${elementId}` } />
       </div>
     {/each}
   </div>
