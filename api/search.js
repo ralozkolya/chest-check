@@ -4,7 +4,7 @@ import regions from '../data/regions.json';
 // To retrieve the versions list, check
 // https://ddragon.leagueoflegends.com/api/versions.json
 // Champion list
-// https://ddragon.leagueoflegends.com/cdn/12.1.1/data/en_US/championFull.json
+// https://ddragon.leagueoflegends.com/cdn/12.4.1/data/en_US/championFull.json
 import champMap from '../data/championsFull.json';
 
 export default async (req, res) => {
@@ -38,7 +38,8 @@ export default async (req, res) => {
         name: full.name,
         level: champ.championLevel,
         chestGranted: champ.chestGranted,
-        image: `https://ddragon.leagueoflegends.com/cdn/${champMap.version}/img/champion/${full.image.full}`
+        image: `https://ddragon.leagueoflegends.com/cdn/${champMap.version}/img/champion/${full.image.full}`,
+        splash: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${full.name}_0.jpg`,
       };
     });
 
