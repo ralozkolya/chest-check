@@ -39,7 +39,7 @@ export default async (req, res) => {
         level: champ.championLevel,
         chestGranted: champ.chestGranted,
         image: `https://ddragon.leagueoflegends.com/cdn/${champMap.version}/img/champion/${full.image.full}`,
-        splash: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${full.name}_0.jpg`,
+        splash: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${full.id}_0.jpg`,
       };
     });
 
