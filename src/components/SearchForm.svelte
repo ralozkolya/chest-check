@@ -1,45 +1,35 @@
 <script>
-  import { createEventDispatcher, onMount } from "svelte";
   import { navigate } from "svelte-routing";
-  import { globalHistory } from "svelte-routing/src/history";
+  import debounce from "lodash/debounce";
   import regions from "../../data/regions.json";
-  import "../scss/search-form.scss";
+  import { username, region, regionKeys } from '../stores/summoner';
+  import { champions } from '../stores/champions';
+  import { loading, refresh, error } from '../stores/app';
+  import search from "../utils/api";
   import Dropdown from "./Dropdown.svelte";
 
-  export let loading;
+  import "../scss/search-form.scss";
+  import { onMount } from "svelte";
 
-  const REGION_KEY = "region";
-  const USERNAME_KEY = "username";
-
-  const regionKeys = Object.keys(regions);
-
-  const path = location.pathname.split("/").slice(1);
-  let region;
-  let username;
-
-  if (2 === path.length && regionKeys.includes(path[0])) {
-    [region, username] = path;
-  } else {
-    region = localStorage.getItem(REGION_KEY) || regionKeys[0];
-    username = localStorage.getItem(USERNAME_KEY) || "";
-  }
-
-  const dispatch = createEventDispatcher();
+  const retrieve = debounce(async () => {
+    $loading = true;
+    try {
+      $error = null;
+      champions.set(await search($username, regions[$region]));
+    } catch (e) {
+      $error = e.message;
+    }
+    $loading = false;
+  }, 10);
 
   function onSubmit() {
-    localStorage.setItem(REGION_KEY, region);
-    localStorage.setItem(USERNAME_KEY, username);
-    navigate(`/${region}/${username}`);
-    dispatch("update", { username, region });
+    $loading = true;
+    $error = null;
+    navigate(`/${$region}/${$username}`);
+    retrieve();
   }
 
-  let refresh = location.pathname.length > 1;
-
-  onMount(() => {
-    globalHistory.listen(() => {
-      refresh = location.pathname.length > 1;
-    });
-  });
+  onMount(() => $username && $region && retrieve());
 
 </script>
 
@@ -49,13 +39,14 @@
       <input
         type="text"
         class="form-control form-control-lg search-input"
-        bind:value={username}
+        bind:value={$username}
         placeholder="Summoner name"
         aria-label="Summoner name"
-        required />
-      <Dropdown keys={regionKeys} bind:value={region} />
-      <button class="btn btn-outline-light wide" disabled={loading}>
-        { loading ? 'Loading...' : refresh ? 'Refresh' : 'Search' }
+        required
+      />
+      <Dropdown keys={$regionKeys} bind:value={$region} />
+      <button class="btn btn-outline-light wide" disabled={$loading}>
+        {$loading ? "Loading..." : $refresh ? "Refresh" : "Search"}
       </button>
     </div>
   </div>

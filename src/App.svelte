@@ -6,14 +6,6 @@ import SearchForm from './components/SearchForm.svelte';
 import User from './components/User.svelte';
 import './scss/app.scss';
 
-let user;
-let loading;
-
-function handleUpdate(d) {
-  const { username, region } = d.detail;
-  user && user.update(username, region);
-}
-
 </script>
 
 <Router>
@@ -23,9 +15,9 @@ function handleUpdate(d) {
     </header>
 
     <main class="flex-grow-1">
-      <SearchForm { loading } on:update={ handleUpdate } />
-      <Route path=":region/:username" let:params>
-        <User bind:this={ user } bind:loading={ loading } { ...params } />
+      <SearchForm />
+      <Route path=":region/:username">
+        <User />
       </Route>
       <Route path="/">
         <h3>Enter summoner name to check granted chests</h3>

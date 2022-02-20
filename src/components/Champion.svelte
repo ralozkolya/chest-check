@@ -1,14 +1,14 @@
 <script>
-  import { createEventDispatcher, onMount } from "svelte";
+  import { onMount } from 'svelte';
   import Collapse from 'bootstrap/js/dist/collapse';
   import Bluebird from 'bluebird';
+
+  import { forgottenIds } from '../stores/champions';
 
   import '../scss/champion.scss';
 
   export let champion;
   export let parent;
-
-  const dispatch = createEventDispatcher();
 
   const transform = name => name.replace(/\W/g, '').toLowerCase();
 
@@ -28,11 +28,24 @@
     collapse.toggle();
   };
 
+  const onForget = id => {
+    if ($forgottenIds.has(id)) {
+      $forgottenIds.delete(id)
+    } else {
+      $forgottenIds.add(id);
+    }
+    forgottenIds.set($forgottenIds);
+  };
+
+  let forgotten
+  $: forgotten = $forgottenIds.has(champion.id);
+
   onMount(async () => {
     collapse = Collapse.getOrCreateInstance(collapseRef, { toggle: false });
     collapseRef.addEventListener('show.bs.collapse', () => show = true);
     collapseRef.addEventListener('hide.bs.collapse', () => show = false);
   });
+
 </script>
 
 <div class="wrapper" class:open={ show }>
@@ -55,8 +68,12 @@
       class="btn btn-sm btn-primary">
       Visit U.GG page
     </a>
-    <button class="btn btn-sm btn-danger" on:click={() => dispatch("forget", champion.id)}>
-      Forget
+    <button
+      class="btn btn-sm"
+      class:btn-danger={ !forgotten }
+      class:btn-success={ forgotten }
+      on:click={ () => onForget(champion.id) }>
+      { forgotten ? 'Restore' : 'Forget' }
     </button>
   </div>
 </div>
