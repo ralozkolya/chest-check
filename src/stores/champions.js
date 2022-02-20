@@ -14,7 +14,7 @@ export const championName = writable('');
 export const filtered = derived(
   [ champions, championName ],
   ([ $champions, $name ]) => $champions.filter(champ => {
-    return !$name || champ.name.toLowerCase().includes($name?.toLowerCase())
+    return !$name || champ.name.toLowerCase().includes($name.toLowerCase())
   })
 );
 
