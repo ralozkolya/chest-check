@@ -1,3 +1,5 @@
+import transform from './transform';
+
 export default async function search(username, region) {
   try {
 
@@ -16,4 +18,25 @@ export default async function search(username, region) {
       : 'Unexpected error occured';
     throw Error(message);
   }
+}
+
+export async function runes(champion, rank, role) {
+
+  champion = transform(champion);
+
+  const params = new URLSearchParams();
+
+  Object.entries({ champion, rank, role }).forEach(([ key, value ]) => {
+    value && params.set(key, value);
+  });
+
+  const url = `/api/runes?${ params }`;
+  const response = await fetch(url);
+
+  if (response.ok) {
+    return response.json();
+  }
+
+  throw Error('Unexpected error occured');
+
 }

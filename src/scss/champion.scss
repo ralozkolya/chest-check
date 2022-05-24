@@ -25,10 +25,10 @@
 
 .details {
   width: calc(100% - 24px);
+  height: 508px;
   left: 12px;
   position: absolute;
   margin-top: 1rem;
-  z-index: -1;
 
   &:after {
     content: ' ';
@@ -39,12 +39,12 @@
     left: 0;
     background-image: var(--background-image);
     background-size: cover;
-    background-position: 0 -30px;
+    background-position: center;
     filter: brightness(30%);
     z-index: -1;
   }
 }
 
 .open {
-  padding-bottom: 120px;
+  padding-bottom: 520px;
 }

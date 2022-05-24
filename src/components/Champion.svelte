@@ -6,6 +6,7 @@
   import { championId } from '../stores/champions';
 
   import ForgetButton from "./ForgetButton.svelte";
+  import Runes from "./Runes.svelte";
 
   import "../scss/champion.scss";
 
@@ -34,16 +35,19 @@
       style="--background-image: url('{champion.splash}')"
     >
       <div class="p-3">
-        <h5 class="mb-3">{champion.name}</h5>
-        <a
-          target="_blank"
-          rel="noreferrer"
-          href={`https://u.gg/lol/champions/${transform(champion.name)}/build`}
-          class="btn btn-sm btn-primary"
-        >
-          Visit U.GG page
-        </a>
-        <ForgetButton id={ champion.id } />
+        <div class="d-flex mb-3">
+          <h5 class="flex-grow-1">{champion.name}</h5>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={`https://u.gg/lol/champions/${transform(champion.name)}/build`}
+            class="btn btn-sm btn-primary me-2"
+          >
+            Visit U.GG page
+          </a>
+          <ForgetButton id={ champion.id } />
+        </div>
+        <Runes { champion } />
       </div>
     </div>
   {/if}
