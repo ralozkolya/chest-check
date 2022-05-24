@@ -6,7 +6,7 @@
   export let champion;
 
   let rank = 'gold';
-  let role;
+  let role = '';
   $: response = runes(champion.name, rank, role);
 
 </script>
