@@ -46,6 +46,11 @@
             Visit U.GG page
           </a>
           <ForgetButton id={ champion.id } />
+          <button
+            on:click={ () => show = false }
+            class="btn btn-sm btn-secondary ms-2">
+              Close
+          </button>
         </div>
         <Runes { champion } />
       </div>
