@@ -1,6 +1,6 @@
 <script>
 
-  import { forgottenIds } from "../stores/champions";
+  import { forgottenIds, championId } from "../stores/champions";
 
   export let id;
 
@@ -13,6 +13,7 @@
       $forgottenIds.add(id);
     }
     forgottenIds.set($forgottenIds);
+    championId.set(null);
   };
 
 </script>
