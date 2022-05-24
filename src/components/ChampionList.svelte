@@ -8,22 +8,19 @@
   export let perPage = null;
   export let list = [];
   export let size = "lg";
-  
-  const elementId = `id-${crypto.randomUUID()}`;
-  let sliced;
 
   $: sliced = perPage ? list.slice(0, perPage) : list;
 </script>
 
 {#if sliced.length}
-  <div class="row position-relative" id={ elementId }>
+  <div class="row position-relative">
     {#each sliced as champion (champion.id)}
       <div
         animate:flip={{ duration: 200 }}
         class="col-3 col-md-4 my-2 overflow-hidden"
         class:col-lg-2={'lg' !== size}
         class:col-lg-3={'lg' === size}>
-        <Champion on:forget {champion} parent={ `#${elementId}` } />
+        <Champion {champion} />
       </div>
     {/each}
   </div>

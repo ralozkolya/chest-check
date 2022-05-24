@@ -3,6 +3,7 @@
   import ChampionList from "./ChampionList.svelte";
   import { granted, notGranted, forgotten, championName } from '../stores/champions';
   import { loading, error } from '../stores/app';
+
 </script>
 
 <div>

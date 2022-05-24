@@ -11,6 +11,8 @@ export const champions = writable([]);
 
 export const championName = writable('');
 
+export const championId = writable(null);
+
 export const filtered = derived(
   [ champions, championName ],
   ([ $champions, $name ]) => $champions.filter(champ => {
