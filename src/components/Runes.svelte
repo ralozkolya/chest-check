@@ -48,10 +48,10 @@
   </div>
 {:then runes}
   <div class="row my-5">
-    <div class="col-md-6">
+    <div class="col-xl-6">
       <RuneTree tree={ runes.primaryTree } />
     </div>
-    <div class="col-md-5 offset-md-1">
+    <div class="col-xl-5 offset-xl-1">
       <RuneTree tree={ runes.secondaryTree } />
     </div>
   </div>
