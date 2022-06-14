@@ -19,6 +19,7 @@
       <select class="form-select bg-dark text-light" bind:value={ mode }>
         <option value="ranked">Ranked</option>
         <option value="aram">ARAM</option>
+        <option value="arurf">ARURF</option>
       </select>
     </label>
   </div>

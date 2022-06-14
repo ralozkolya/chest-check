@@ -7,15 +7,20 @@ export default async (req, res) => {
 
   let response;
 
-  if ('ranked' === mode) {
-    response = await axios.get(
-      `https://u.gg/lol/champions/${champion}/build`,
-      {
-        params: { rank, role }
-      }
-    );
-  } else {
-    response = await axios.get(`https://u.gg/lol/champions/aram/${champion}-aram`);
+  switch (mode) {
+    case 'aram':
+      response = await axios.get(`https://u.gg/lol/champions/aram/${champion}-aram`);
+      break;
+    case 'arurf':
+      response = await axios.get(`https://u.gg/lol/champions/arurf/${champion}-arurf`);
+      break;
+    default:
+      response = await axios.get(
+        `https://u.gg/lol/champions/${champion}/build`,
+        {
+          params: { rank, role }
+        }
+      );
   }
 
   const $ = cheerio.load(response.data);
