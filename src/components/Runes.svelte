@@ -68,10 +68,10 @@
 {:then runes}
   <div class="row my-3">
     <div class="col-xl-6">
-      <RuneTree tree={ runes.primaryTree } />
+      <RuneTree data={ runes.primaryTree } />
     </div>
     <div class="col-xl-5 offset-xl-1">
-      <RuneTree tree={ runes.secondaryTree } />
+      <RuneTree data={ runes.secondaryTree } />
     </div>
   </div>
 {:catch e}

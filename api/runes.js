@@ -25,53 +25,38 @@ export default async (req, res) => {
 
   const $ = cheerio.load(response.data);
 
-  const primaryTree = getPrimaryTree($);
-  const secondaryTree = getSecondaryTree($);
+  const primaryTree = getTree($, '.media-query_MOBILE_LARGE__DESKTOP_LARGE .primary-tree');
+  const secondaryTree = getTree($, '.media-query_MOBILE_LARGE__DESKTOP_LARGE .secondary-tree');
 
   res.send({ primaryTree, secondaryTree });
 
 };
 
-function getPrimaryTree($) {
+function getTree($, selector) {
 
-  const rows = $('.media-query_MOBILE_LARGE__DESKTOP_LARGE .primary-tree .perk-row');
+  const rows = $(`${selector} .perk-row`);
 
-  const result = rows.map((i, row) => {
+  const header = $(`${selector} .rune-tree_header`);
+  const title = header.find('.perk-style-title').html();
+  const img = header.find('img');
+  const src = img.attr('src');
+  const alt = img.attr('alt');
 
-    const perk = $(row).find('.perk').map((i, perk) => {
+  const tree = rows.map((i, row) => {
+
+    const perk = $(row).find('.perk, .shard').map((i, perk) => {
       const active = !perk.attribs.class.includes('inactive');
       const keystone = perk.attribs.class.includes('keystone');
       const img = $(perk).find('img');
       const src = img.attr('src');
       const alt = img.attr('alt');
-      return { active, src, alt, keystone };
-    }).get();
-
-    return [ perk ];
-  }).get();
-
-  return result;
-
-}
-
-function getSecondaryTree($) {
-
-  const rows = $('.media-query_MOBILE_LARGE__DESKTOP_LARGE .secondary-tree .perk-row');
-
-  const result = rows.map((i, row) => {
-
-    const perk = $(row).find('.perk, .shard').map((j, perk) => {
-      const active = !perk.attribs.class.includes('inactive');
       const shard = i > 2;
-      const img = $(perk).find('img');
-      const src = img.attr('src');
-      const alt = img.attr('alt');
-      return { active, src, alt, shard };
+      return { active, src, alt, shard, keystone };
     }).get();
 
     return [ perk ];
 
   }).get();
 
-  return result;
+  return { tree, title, src, alt };
 }
