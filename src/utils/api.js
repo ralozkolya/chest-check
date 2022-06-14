@@ -20,13 +20,13 @@ export default async function search(username, region) {
   }
 }
 
-export async function runes(champion, rank, role) {
+export async function runes(champion, mode, rank, role) {
 
   champion = transform(champion);
 
   const params = new URLSearchParams();
 
-  Object.entries({ champion, rank, role }).forEach(([ key, value ]) => {
+  Object.entries({ champion, mode, rank, role }).forEach(([ key, value ]) => {
     value && params.set(key, value);
   });
 

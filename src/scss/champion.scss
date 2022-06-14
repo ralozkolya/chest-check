@@ -1,5 +1,8 @@
 @import 'bootstrap/scss/mixins';
 
+$xl-height: 540px;
+$sm-height: 950px;
+
 .img-container {
   width: 100%;
   padding-top: 100%;
@@ -25,7 +28,7 @@
 
 .details {
   width: calc(100% - 24px);
-  height: 838px;
+  height: $sm-height - 12;
   left: 12px;
   position: absolute;
   margin-top: 1rem;
@@ -45,14 +48,14 @@
   }
 
   @include media-breakpoint-up(xl) {
-    height: 508px;
+    height: $xl-height - 12;
   }
 }
 
 .open {
-  padding-bottom: 850px;
+  padding-bottom: $sm-height;
 
   @include media-breakpoint-up(xl) {
-    padding-bottom: 520px;
+    padding-bottom: $xl-height;
   }
 }

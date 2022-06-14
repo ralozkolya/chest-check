@@ -3,14 +3,20 @@ import * as cheerio from 'cheerio';
 
 export default async (req, res) => {
 
-  const { champion, rank, role } = req.query;
+  const { champion, mode, rank, role } = req.query;
 
-  const response = await axios.get(
-    `https://u.gg/lol/champions/${champion}/build`,
-    {
-      params: { rank, role }
-    }
-  );
+  let response;
+
+  if ('ranked' === mode) {
+    response = await axios.get(
+      `https://u.gg/lol/champions/${champion}/build`,
+      {
+        params: { rank, role }
+      }
+    );
+  } else {
+    response = await axios.get(`https://u.gg/lol/champions/aram/${champion}-aram`);
+  }
 
   const $ = cheerio.load(response.data);
 
