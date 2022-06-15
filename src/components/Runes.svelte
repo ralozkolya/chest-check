@@ -70,7 +70,7 @@
     <div class="col-8 offset-2 col-lg-6 offset-lg-0 col-xl-4 offset-xl-1">
       <RuneTree data={ runes.primaryTree } />
     </div>
-    <div class="col-8 offset-2 col-lg-5 offset-lg-1 col-xl-4 offset-xl-1">
+    <div class="col-8 offset-2 col-lg-5 offset-lg-1 col-xl-4 offset-xl-2">
       <RuneTree data={ runes.secondaryTree } />
     </div>
   </div>
