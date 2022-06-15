@@ -47,10 +47,10 @@ function getTree($, selector) {
     const perk = $(row).find('.perk, .shard').map((i, perk) => {
       const active = !perk.attribs.class.includes('inactive');
       const keystone = perk.attribs.class.includes('keystone');
+      const shard = perk.attribs.class.includes('shard');
       const img = $(perk).find('img');
       const src = img.attr('src');
       const alt = img.attr('alt');
-      const shard = i > 2;
       return { active, src, alt, shard, keystone };
     }).get();
 
