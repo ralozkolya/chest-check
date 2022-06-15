@@ -25,7 +25,7 @@
     </div>
   </div>
   {#if !$loading && !$error}
-    <div class="row">
+    <div class="row position-relative">
       <div class="col-md-7">
         <h4>To earn ({$notGranted.length}):</h4>
         <ChampionList

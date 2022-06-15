@@ -13,7 +13,7 @@
 </script>
 
 <div class="row my-3">
-  <div class="col-xl mb-3">
+  <div class="col-lg mb-3">
     <label class="w-100">
       Mode
       <select class="form-select bg-dark text-light" bind:value={ mode }>
@@ -24,7 +24,7 @@
     </label>
   </div>
   {#if mode === 'ranked'}
-    <div class="col-xl mb-2">
+    <div class="col-lg mb-2">
       <label class="w-100">
         Rank
         <select class="form-select bg-dark text-light" bind:value={ rank }>
@@ -45,7 +45,7 @@
         </select>
       </label>
     </div>
-    <div class="col-xl mb-2">
+    <div class="col-lg mb-2">
       <label class="w-100">
         Role
         <select class="form-select bg-dark text-light" bind:value={ role }>
@@ -67,10 +67,10 @@
   </div>
 {:then runes}
   <div class="row my-3">
-    <div class="col-xl-6">
+    <div class="col-8 offset-2 col-lg-6 offset-lg-0 col-xl-4 offset-xl-1">
       <RuneTree data={ runes.primaryTree } />
     </div>
-    <div class="col-xl-5 offset-xl-1">
+    <div class="col-8 offset-2 col-lg-5 offset-lg-1 col-xl-4 offset-xl-1">
       <RuneTree data={ runes.secondaryTree } />
     </div>
   </div>

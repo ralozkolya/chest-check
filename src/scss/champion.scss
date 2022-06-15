@@ -32,6 +32,8 @@ $sm-height: 1200px;
   left: 12px;
   position: absolute;
   margin-top: 1rem;
+  z-index: 2;
+  border: solid 1px #444;
 
   &:after {
     content: ' ';
@@ -47,7 +49,7 @@ $sm-height: 1200px;
     z-index: -1;
   }
 
-  @include media-breakpoint-up(xl) {
+  @include media-breakpoint-up(lg) {
     height: $xl-height - 12;
   }
 }
@@ -55,7 +57,7 @@ $sm-height: 1200px;
 .open {
   padding-bottom: $sm-height;
 
-  @include media-breakpoint-up(xl) {
+  @include media-breakpoint-up(lg) {
     padding-bottom: $xl-height;
   }
 }

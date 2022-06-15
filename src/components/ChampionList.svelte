@@ -13,7 +13,7 @@
 </script>
 
 {#if sliced.length}
-  <div class="row position-relative">
+  <div class="row">
     {#each sliced as champion (champion.id)}
       <div
         animate:flip={{ duration: 200 }}
