@@ -33,6 +33,7 @@ $sm-height: 1200px;
   position: absolute;
   margin-top: 1rem;
   z-index: 2;
+  background: $dark;
   border: solid 1px #444;
 
   &:after {
