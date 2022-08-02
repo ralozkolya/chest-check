@@ -2,13 +2,13 @@
 
   import { runes } from '../utils/api';
   import RuneTree from './RuneTree.svelte';
+  import { mode } from '../stores/runes';
 
   export let champion;
 
   let rank = 'gold';
   let role = '';
-  let mode = 'ranked';
-  $: response = runes(champion.name, mode, rank, role);
+  $: response = runes(champion.name, $mode, rank, role);
 
 </script>
 
@@ -16,14 +16,14 @@
   <div class="col-lg mb-3">
     <label class="w-100">
       Mode
-      <select class="form-select bg-dark text-light" bind:value={ mode }>
+      <select class="form-select bg-dark text-light" bind:value={ $mode }>
         <option value="ranked">Ranked</option>
         <option value="aram">ARAM</option>
         <!-- <option value="arurf">ARURF</option> -->
       </select>
     </label>
   </div>
-  {#if mode === 'ranked'}
+  {#if $mode === 'ranked'}
     <div class="col-lg mb-2">
       <label class="w-100">
         Rank

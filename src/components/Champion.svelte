@@ -4,6 +4,7 @@
 
   import transform from '../utils/transform';
   import { championId } from '../stores/champions';
+  import { mode } from '../stores/runes';
 
   import ForgetButton from "./ForgetButton.svelte";
   import Runes from "./Runes.svelte";
@@ -16,6 +17,10 @@
     let id = $championId === champion.id ? null : champion.id;
     championId.set(id);
   };
+
+  $: url = 'ranked' === $mode
+      ? `https://u.gg/lol/champions/${transform(champion.name)}/build`
+      : `https://u.gg/lol/champions/aram/${transform(champion.name)}-aram`
 
   $: show = $championId === champion.id;
 </script>
@@ -40,7 +45,7 @@
           <a
             target="_blank"
             rel="noreferrer"
-            href={`https://u.gg/lol/champions/${transform(champion.name)}/build`}
+            href={ url }
             class="btn btn-sm btn-primary me-2"
           >
             Visit U.GG page
