@@ -33,7 +33,7 @@ export default async (req, res) => {
 
       const full = champMap.data[champMap.keys[champ.championId]];
 
-      return {
+      return full && {
         id: champ.championId,
         points: champ.championPoints,
         name: full.name,
@@ -44,7 +44,7 @@ export default async (req, res) => {
       };
     });
 
-    res.send(mapped);
+    res.send(mapped.filter(champ => champ));
 
   } catch (e) {
     res.status(e.response && e.response.status || 500).send(e);
