@@ -1,14 +1,14 @@
 <script>
 
-  import { runes } from '../utils/api';
-  import RuneTree from './RuneTree.svelte';
+  // import { runes } from '../utils/api';
+  // import RuneTree from './RuneTree.svelte';
   import { mode } from '../stores/runes';
 
-  export let champion;
+  // export let champion;
 
   let rank = 'gold';
   let role = '';
-  $: response = runes(champion.name, $mode, rank, role);
+  // $: response = runes(champion.name, $mode, rank, role);
 
 </script>
 
@@ -61,7 +61,11 @@
   {/if}
 </div>
 
-{#await response}
+<div class="py-3 text-center">
+  <h2>Soon...</h2>
+</div>
+
+<!-- {#await response}
   <div class="py-3">
     <div class="spinner-border text-center" role="status"></div>
   </div>
@@ -76,4 +80,4 @@
   </div>
 {:catch e}
   { e }
-{/await}
+{/await} -->
