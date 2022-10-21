@@ -5,8 +5,8 @@ import regions from '../data/regions.json';
 // To retrieve the versions list, check
 // https://ddragon.leagueoflegends.com/api/versions.json
 // Champion list
-// https://ddragon.leagueoflegends.com/cdn/12.19.1/data/en_US/championFull.json
-import champMap from '../data/championsFull.json';
+// https://ddragon.leagueoflegends.com/cdn/12.20.1/data/en_US/championFull.json
+import champMap from '../data/championFull.json';
 
 export default async (req, res) => {
 
