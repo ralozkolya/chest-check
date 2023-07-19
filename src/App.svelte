@@ -1,11 +1,9 @@
 <script>
+  import { Router, Link, Route } from "svelte-routing";
 
-import { Router, Link, Route } from 'svelte-routing';
-
-import SearchForm from './components/SearchForm.svelte';
-import User from './components/User.svelte';
-import './scss/app.scss';
-
+  import SearchForm from "./components/SearchForm.svelte";
+  import User from "./components/User.svelte";
+  import "./scss/app.scss";
 </script>
 
 <Router>
@@ -25,9 +23,13 @@ import './scss/app.scss';
     </main>
 
     <footer class="my-3 text-center">
-      <a class="mr-3" rel="noreferrer" href="https://github.com/ralozkolya/chest-check" target="_blank">Source</a>
+      <span class="float-end">v13.14.1</span>
+      <a
+        class="mr-3"
+        rel="noreferrer"
+        href="https://github.com/ralozkolya/chest-check"
+        target="_blank">Source</a
+      >
     </footer>
-
   </div>
-
 </Router>
