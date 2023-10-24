@@ -1,10 +1,8 @@
 <script>
+  import { fly } from "svelte/transition";
 
-  import { fly } from 'svelte/transition';
-
-  import transform from '../utils/transform';
-  import { championId } from '../stores/champions';
-  import { mode } from '../stores/runes';
+  import { championId } from "../stores/champions";
+  import { mode } from "../stores/runes";
 
   import ForgetButton from "./ForgetButton.svelte";
   import Runes from "./Runes.svelte";
@@ -18,9 +16,10 @@
     championId.set(id);
   };
 
-  $: url = 'ranked' === $mode
-      ? `https://u.gg/lol/champions/${transform(champion.name)}/build`
-      : `https://u.gg/lol/champions/aram/${transform(champion.name)}-aram`
+  $: url =
+    "ranked" === $mode
+      ? `https://u.gg/lol/champions/${champion.id}/build`
+      : `https://u.gg/lol/champions/aram/${champion.id}-aram`;
 
   $: show = $championId === champion.id;
 </script>
@@ -28,7 +27,7 @@
 <div class="wrapper" class:open={show}>
   <div class="champion">
     <div class="img-container">
-      <a href="/" on:click|preventDefault={ toggleDetails }>
+      <a href="/" on:click|preventDefault={toggleDetails}>
         <img class="w-100" src={champion.image} alt={champion.name} />
       </a>
     </div>
@@ -45,19 +44,20 @@
           <a
             target="_blank"
             rel="noreferrer"
-            href={ url }
+            href={url}
             class="btn btn-sm btn-primary me-2"
           >
             Visit U.GG page
           </a>
-          <ForgetButton id={ champion.id } />
+          <ForgetButton id={champion.id} />
           <button
-            on:click={ () => show = false }
-            class="btn btn-sm btn-secondary ms-2">
-              Close
+            on:click={() => (show = false)}
+            class="btn btn-sm btn-secondary ms-2"
+          >
+            Close
           </button>
         </div>
-        <Runes { champion } />
+        <Runes {champion} />
       </div>
     </div>
   {/if}

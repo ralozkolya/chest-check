@@ -1,33 +1,31 @@
 <script>
+  import { runes } from "../utils/api";
+  import RuneTree from "./RuneTree.svelte";
+  import { mode } from "../stores/runes";
 
-  // import { runes } from '../utils/api';
-  // import RuneTree from './RuneTree.svelte';
-  import { mode } from '../stores/runes';
+  export let champion;
 
-  // export let champion;
-
-  let rank = 'gold';
-  let role = '';
-  // $: response = runes(champion.name, $mode, rank, role);
-
+  let rank = "gold";
+  let role = "";
+  $: response = runes(champion.name, $mode, rank, role);
 </script>
 
 <div class="row my-3">
   <div class="col-lg mb-3">
     <label class="w-100">
       Mode
-      <select class="form-select bg-dark text-light" bind:value={ $mode }>
+      <select class="form-select bg-dark text-light" bind:value={$mode}>
         <option value="ranked">Ranked</option>
         <option value="aram">ARAM</option>
         <!-- <option value="arurf">ARURF</option> -->
       </select>
     </label>
   </div>
-  {#if $mode === 'ranked'}
+  {#if $mode === "ranked"}
     <div class="col-lg mb-2">
       <label class="w-100">
         Rank
-        <select class="form-select bg-dark text-light" bind:value={ rank }>
+        <select class="form-select bg-dark text-light" bind:value={rank}>
           <option value="">Platinum +</option>
           <option value="diamond_plus">Diamond +</option>
           <option value="diamond_2_plus">Diamond 2 +</option>
@@ -48,7 +46,7 @@
     <div class="col-lg mb-2">
       <label class="w-100">
         Role
-        <select class="form-select bg-dark text-light" bind:value={ role }>
+        <select class="form-select bg-dark text-light" bind:value={role}>
           <option value="">Default</option>
           <option value="top">Top</option>
           <option value="jungle">Jungle</option>
@@ -61,23 +59,23 @@
   {/if}
 </div>
 
-<div class="py-3 text-center">
-  <h2>Soon...</h2>
-</div>
-
-<!-- {#await response}
-  <div class="py-3">
-    <div class="spinner-border text-center" role="status"></div>
+{#await response}
+  <div class="py-3 text-center">
+    <div class="spinner-border" role="status" />
   </div>
 {:then runes}
   <div class="row my-3">
-    <div class="col-8 offset-2 col-lg-6 offset-lg-0 col-xl-4 offset-xl-1">
-      <RuneTree data={ runes.primaryTree } />
+    <div
+      class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 col-xl-5 offset-xl-1"
+    >
+      <RuneTree data={runes.primaryTree} />
     </div>
-    <div class="col-8 offset-2 col-lg-5 offset-lg-1 col-xl-4 offset-xl-2">
-      <RuneTree data={ runes.secondaryTree } />
+    <div
+      class="col-10 offset-1 col-md-8 offset-md-2 col-lg-4 offset-lg-2 col-xl-3 offset-xl-2"
+    >
+      <RuneTree data={runes.secondaryTree} />
     </div>
   </div>
 {:catch e}
-  { e }
-{/await} -->
+  {e}
+{/await}

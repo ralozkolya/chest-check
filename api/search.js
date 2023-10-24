@@ -10,7 +10,7 @@ import champMap from "../data/championFull.json";
 
 export default async (req, res) => {
   const { RIOT_KEY } = process.env;
-  const params = { headers: { "X-Riot-Token": RIOT_KEY } };
+  const client = axios.create({ headers: { "X-Riot-Token": RIOT_KEY } });
 
   try {
     validate(req.query);
@@ -24,33 +24,35 @@ export default async (req, res) => {
   try {
     const {
       data: { id },
-    } = await axios.get(
-      `${url}/lol/summoner/v4/summoners/by-name/${username}`,
-      params
+    } = await client.get(
+      `${url}/lol/summoner/v4/summoners/by-name/${username}`
     );
 
-    const mastery = await axios.get(
-      `${url}/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}`,
-      params
+    const mastery = await client.get(
+      `${url}/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}`
     );
 
-    const mapped = mastery.data.map((champ) => {
-      const full = champMap.data[champMap.keys[champ.championId]];
+    const indexedMastery = {};
+    mastery.data.forEach(
+      (mastery) => (indexedMastery[mastery.championId] = mastery)
+    );
 
-      return (
-        full && {
-          id: champ.championId,
-          points: champ.championPoints,
-          name: full.name,
-          level: champ.championLevel,
-          chestGranted: champ.chestGranted,
-          image: `https://ddragon.leagueoflegends.com/cdn/${champMap.version}/img/champion/${full.image.full}`,
-          splash: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${full.id}_0.jpg`,
-        }
-      );
+    const mapped = Object.entries(champMap.keys).map(([id, name]) => {
+      const champ = champMap.data[name];
+      const mastery = indexedMastery[id];
+
+      return {
+        id: champ.id,
+        name: champ.name,
+        points: mastery?.championPoints ?? 0,
+        level: mastery?.championLevel ?? 1,
+        chestGranted: !!mastery?.chestGranted,
+        image: `https://ddragon.leagueoflegends.com/cdn/${champMap.version}/img/champion/${champ.image.full}`,
+        splash: `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`,
+      };
     });
 
-    res.send(mapped.filter((champ) => champ));
+    res.send(mapped.sort((a, b) => b.points - a.points));
   } catch (e) {
     res.status((e.response && e.response.status) || 500).send(e);
   }
