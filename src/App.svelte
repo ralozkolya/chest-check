@@ -23,7 +23,7 @@
     </main>
 
     <footer class="my-3 text-center">
-      <span class="float-end text-secondary">v13.20.1</span>
+      <span class="float-end text-secondary">v13.21.1</span>
       <a
         class="mr-3"
         rel="noreferrer"
