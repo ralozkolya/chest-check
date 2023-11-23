@@ -1,6 +1,8 @@
 // Required
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
 
 // Optional
@@ -18,6 +20,6 @@
 @import "bootstrap/scss/transitions";
 
 body {
-    background: $dark;
-    color: $light;
+  background: $dark;
+  color: $light;
 }

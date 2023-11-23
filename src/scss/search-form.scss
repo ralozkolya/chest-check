@@ -1,17 +1,20 @@
-@import 'bootstrap/scss/mixins';
+@import "bootstrap/scss/mixins";
 
 .search-input {
-    flex-grow: 4 !important;
+  flex-grow: 4 !important;
 }
 
 @include media-breakpoint-up(md) {
+  .search-input {
+    flex-grow: 8 !important;
+  }
 
-    .search-input {
-        flex-grow: 8 !important;
-    }
+  .wide,
+  .dropdown-toggle {
+    flex-basis: 150px;
+  }
 
-    .wide, .dropdown-toggle {
-        flex-basis: 150px;
-    }
-
+  .dropdown-toggle {
+    border-radius: 0;
+  }
 }

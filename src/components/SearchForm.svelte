@@ -2,9 +2,9 @@
   import { navigate } from "svelte-routing";
   import debounce from "lodash/debounce";
   import regions from "../../data/regions.json";
-  import { username, region, regionKeys } from '../stores/summoner';
-  import { champions } from '../stores/champions';
-  import { loading, refresh, error } from '../stores/app';
+  import { username, region, regionKeys } from "../stores/summoner";
+  import { champions } from "../stores/champions";
+  import { loading, refresh, error } from "../stores/app";
   import search from "../utils/api";
   import Dropdown from "./Dropdown.svelte";
 
@@ -30,24 +30,21 @@
   }
 
   onMount(() => $username && $region && retrieve());
-
 </script>
 
 <form on:submit|preventDefault={onSubmit}>
-  <div class="form-group">
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control form-control-lg search-input"
-        bind:value={$username}
-        placeholder="Summoner name"
-        aria-label="Summoner name"
-        required
-      />
-      <Dropdown keys={$regionKeys} bind:value={$region} />
-      <button class="btn btn-outline-light wide" disabled={$loading}>
-        {$loading ? "Loading..." : $refresh ? "Refresh" : "Search"}
-      </button>
-    </div>
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control form-control-lg search-input"
+      bind:value={$username}
+      placeholder="Summoner name"
+      aria-label="Summoner name"
+      required
+    />
+    <Dropdown keys={$regionKeys} bind:value={$region} />
+    <button class="btn btn-outline-light wide" disabled={$loading}>
+      {$loading ? "Loading..." : $refresh ? "Refresh" : "Search"}
+    </button>
   </div>
 </form>
