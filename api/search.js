@@ -5,7 +5,7 @@ import regions from "../data/regions.json";
 // To retrieve the versions list, check
 // https://ddragon.leagueoflegends.com/api/versions.json
 // Champion list
-// https://ddragon.leagueoflegends.com/cdn/13.23.1/data/en_US/championFull.json
+// https://ddragon.leagueoflegends.com/cdn/13.24.1/data/en_US/championFull.json
 import champMap from "../data/championFull.json";
 
 export default async (req, res) => {
@@ -23,13 +23,13 @@ export default async (req, res) => {
 
   try {
     const {
-      data: { id },
+      data: { puuid },
     } = await client.get(
       `${url}/lol/summoner/v4/summoners/by-name/${username}`
     );
 
     const mastery = await client.get(
-      `${url}/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}`
+      `${url}/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}`
     );
 
     const indexedMastery = {};
@@ -54,6 +54,7 @@ export default async (req, res) => {
 
     res.send(mapped.sort((a, b) => b.points - a.points));
   } catch (e) {
+    console.error(e.response.data);
     res.status((e.response && e.response.status) || 500).send(e);
   }
 };
