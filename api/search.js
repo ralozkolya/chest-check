@@ -2,14 +2,17 @@ import axios from "axios";
 import assert from "assert";
 import regions from "../data/regions.json";
 
-// To retrieve the versions list, check
-// https://ddragon.leagueoflegends.com/api/versions.json
-// Champion list
-// https://ddragon.leagueoflegends.com/cdn/14.3.1/data/en_US/championFull.json
-import champMap from "../data/championFull.json";
-
 export default async (req, res) => {
   const { RIOT_KEY } = process.env;
+
+  const {
+    data: [version],
+  } = await axios.get("https://ddragon.leagueoflegends.com/api/versions.json");
+
+  const { data: champMap } = await axios.get(
+    `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/championFull.json`
+  );
+
   const client = axios.create({ headers: { "X-Riot-Token": RIOT_KEY } });
 
   try {
@@ -52,7 +55,10 @@ export default async (req, res) => {
       };
     });
 
-    res.send(mapped.sort((a, b) => b.points - a.points));
+    res.send({
+      champions: mapped.sort((a, b) => b.points - a.points),
+      version,
+    });
   } catch (e) {
     console.error(e.response.data);
     res.status((e.response && e.response.status) || 500).send(e);

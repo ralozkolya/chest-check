@@ -13,7 +13,7 @@
 
   const toggleDetails = () => {
     let id = $championId === champion.id ? null : champion.id;
-    championId.set(id);
+    $championId = id;
   };
 
   $: url =

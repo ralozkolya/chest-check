@@ -4,7 +4,7 @@
   import regions from "../../data/regions.json";
   import { username, region, regionKeys } from "../stores/summoner";
   import { champions } from "../stores/champions";
-  import { loading, refresh, error } from "../stores/app";
+  import { loading, refresh, error, version } from "../stores/app";
   import search from "../utils/api";
   import Dropdown from "./Dropdown.svelte";
 
@@ -15,7 +15,9 @@
     $loading = true;
     try {
       $error = null;
-      champions.set(await search($username, regions[$region]));
+      const response = await search($username, regions[$region]);
+      $champions = response.champions;
+      $version = response.version;
     } catch (e) {
       $error = e.message;
     }

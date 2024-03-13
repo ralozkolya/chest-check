@@ -1,8 +1,10 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
+  import { Link, Route, Router } from "svelte-routing";
 
   import SearchForm from "./components/SearchForm.svelte";
   import User from "./components/User.svelte";
+  import { version } from "./stores/app";
+
   import "./scss/app.scss";
 </script>
 
@@ -23,7 +25,9 @@
     </main>
 
     <footer class="my-3 text-center">
-      <span class="float-end text-secondary">v14.3.1</span>
+      {#if $version}
+        <span class="float-end text-secondary">v{$version}</span>
+      {/if}
       <a
         class="mr-3"
         rel="noreferrer"

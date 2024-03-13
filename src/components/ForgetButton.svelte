@@ -1,5 +1,4 @@
 <script>
-
   import { forgottenIds, championId } from "../stores/champions";
 
   export let id;
@@ -12,10 +11,9 @@
     } else {
       $forgottenIds.add(id);
     }
-    forgottenIds.set($forgottenIds);
-    championId.set(null);
+    $forgottenIds = $forgottenIds;
+    $championId = null;
   };
-
 </script>
 
 <button
@@ -23,6 +21,6 @@
   class:btn-danger={!forgotten}
   class:btn-success={forgotten}
   on:click={() => onForget(id)}
-  >
+>
   {forgotten ? "Restore" : "Forget"}
 </button>

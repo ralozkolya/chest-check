@@ -23,7 +23,7 @@
         <div class="input-group-append">
           <button
             class="btn btn-outline-light rounded-0 rounded-end"
-            on:click={() => championName.set("")}
+            on:click={() => ($championName = "")}
           >
             &times;
           </button>
