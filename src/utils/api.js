@@ -7,6 +7,10 @@ export default async function search(username, region) {
       return response.json();
     }
 
+    if (403 === response.status) {
+      throw Error("Unexpeted error occured");
+    }
+
     throw Error("Summoner was not found");
   } catch (e) {
     const message =
