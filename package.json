@@ -22,7 +22,7 @@
     "@popperjs/core": "^2.9.2",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "axios": "^0.28.0",
+    "axios": "^0.30.0",
     "bluebird": "^3.7.2",
     "bootstrap": "^5.0.2",
     "cheerio": "^1.0.0-rc.11",
